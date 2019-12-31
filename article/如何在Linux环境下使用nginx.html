@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>如何在Linux环境下使用nginx</title>
+    <meta name="description" content="Just playing around">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.96380039.css" as="style"><link rel="preload" href="/assets/js/app.241d31fc.js" as="script"><link rel="preload" href="/assets/js/4.f05cbe9d.js" as="script"><link rel="preload" href="/assets/js/19.e6617feb.js" as="script"><link rel="prefetch" href="/assets/js/10.b89ce24d.js"><link rel="prefetch" href="/assets/js/11.639a9ca1.js"><link rel="prefetch" href="/assets/js/12.65d595c9.js"><link rel="prefetch" href="/assets/js/13.d6a22d0c.js"><link rel="prefetch" href="/assets/js/14.73ee7853.js"><link rel="prefetch" href="/assets/js/15.391f7990.js"><link rel="prefetch" href="/assets/js/16.42235ce9.js"><link rel="prefetch" href="/assets/js/17.13b1cc6e.js"><link rel="prefetch" href="/assets/js/18.b0e1b2da.js"><link rel="prefetch" href="/assets/js/20.95ace1e3.js"><link rel="prefetch" href="/assets/js/21.8c75924d.js"><link rel="prefetch" href="/assets/js/22.94777a58.js"><link rel="prefetch" href="/assets/js/23.3522c813.js"><link rel="prefetch" href="/assets/js/24.12acec92.js"><link rel="prefetch" href="/assets/js/25.3628c1cd.js"><link rel="prefetch" href="/assets/js/3.d7d97539.js"><link rel="prefetch" href="/assets/js/5.7c651a00.js"><link rel="prefetch" href="/assets/js/6.8719085c.js"><link rel="prefetch" href="/assets/js/7.9bb8dc3c.js"><link rel="prefetch" href="/assets/js/8.c8f88dd5.js"><link rel="prefetch" href="/assets/js/9.817e904e.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.54285885.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.96380039.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="global-layout" data-v-90f9f68c><div class="user-profile" data-v-a0be93d6 data-v-90f9f68c><div class="user-info" data-v-a0be93d6><img src="/images/avatar.jpg" alt="头像" data-v-a0be93d6><h3 data-v-a0be93d6>R</h3><div class="desc" data-v-a0be93d6>励志成为全栈的小前端</div><p class="location" data-v-a0be93d6>中国重庆(ChongQing, China)</p></div><div class="search-bar" data-v-a0be93d6></div><nav data-v-a0be93d6><a href="/" class="router-link-active" data-v-a0be93d6><div class="link" data-v-a0be93d6><i class="iconfont icon-shouye" data-v-a0be93d6></i><span data-v-a0be93d6>首页</span></div></a><a href="/archive/" data-v-a0be93d6><div class="link" data-v-a0be93d6><i class="iconfont icon-dangan" data-v-a0be93d6></i><span data-v-a0be93d6>归档</span></div></a><a href="/category/" data-v-a0be93d6><div class="link" data-v-a0be93d6><i class="iconfont icon-fenlei" data-v-a0be93d6></i><span data-v-a0be93d6>分类</span></div></a><a href="/tag/" data-v-a0be93d6><div class="link" data-v-a0be93d6><i class="iconfont icon-biaoqian" data-v-a0be93d6></i><span data-v-a0be93d6>标签</span></div></a><a href="/friend-link/" data-v-a0be93d6><div class="link" data-v-a0be93d6><i class="iconfont icon-youqinglianjie" data-v-a0be93d6></i><span data-v-a0be93d6>友情链接</span></div></a><a href="/about/" data-v-a0be93d6><div class="link" data-v-a0be93d6><i class="iconfont icon-guanyu" data-v-a0be93d6></i><span data-v-a0be93d6>关于我</span></div></a></nav></div><main class="theme-page" data-v-43176263 data-v-90f9f68c><div class="theme-default-content content__default" data-v-43176263><h3 id="基本操作"><a href="#基本操作" class="header-anchor">#</a> 基本操作</h3> <p><strong>安装nginx</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code>brew <span class="token function">install</span> nginx
+</code></pre></div><p><strong>Nginx配置文件目录：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>/usr/local/etc/nginx/nginx.conf
+</code></pre></div><p><strong>启动</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code>nginx
+</code></pre></div><p><strong>重启Nginx</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code>nginx -s reload
+</code></pre></div><p><strong>关闭</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 查询nginx对应端口号</span>
+<span class="token function">ps</span> -ef<span class="token operator">|</span><span class="token function">grep</span> nginx
+
+<span class="token function">kill</span> -QUIT <span class="token punctuation">[</span>port<span class="token punctuation">]</span>
+</code></pre></div><h3 id="nginx解决方案-反向代理"><a href="#nginx解决方案-反向代理" class="header-anchor">#</a> Nginx解决方案-反向代理</h3> <h4 id="反向代理"><a href="#反向代理" class="header-anchor">#</a> 反向代理</h4> <blockquote><p>客户端请求服务器，服务器接收转发给其他服务器获得内容，再传给客户端</p></blockquote> <h4 id="正向代理"><a href="#正向代理" class="header-anchor">#</a> 正向代理</h4> <blockquote><p>位于客户端和原始服务器之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标，然后代理向原始服务器转交请求并将获得的内容返回给客户端</p></blockquote> <h3 id="疑难"><a href="#疑难" class="header-anchor">#</a> 疑难</h3> <ol><li>为什么配置了静态资源，但是提示<code>404 Not Found</code></li></ol> <div class="language-txt extra-class"><pre class="language-text"><code>server {
+	listen 8080;
+	server_name localhost;
+	location / {
+		root /Users/$user/server; # 指向项目目录
+		#index index.html index.htm;
+	}
+	location /static/ {
+		alias /Users/$user/server/static; # 静态资源路径
+		autoindex on; # 是否开启目录索引
+	}
+}
+</code></pre></div><p>在指定了静态资源的<code>alias</code>之后，必须保证<code>location /</code>也指向同一个项目目录，否则就会产生错误</p></div></main><div class="theme-main" style="display:;" data-v-90f9f68c><!----></div><div class="theme-right" data-v-f0f13b10 data-v-90f9f68c></div></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.241d31fc.js" defer></script><script src="/assets/js/4.f05cbe9d.js" defer></script><script src="/assets/js/19.e6617feb.js" defer></script>
+  </body>
+</html>
